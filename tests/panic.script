@@ -1,0 +1,6 @@
+expect "anka:/> "
+send panic\n
+expect "KERNEL PANIC: manual panic requested from the shell"
+expect "Backtrace:"
+screen
+quit

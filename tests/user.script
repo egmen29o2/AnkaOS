@@ -1,0 +1,77 @@
+# --- ring 3 programlari, koruma, sistem cagrilari, Ctrl-C, gecmis, seri giris ---
+expect "anka:/> "
+send mem\n
+expect "Physical memory"
+expect "anka:/> "
+send hello a1 "b 2"\n
+expect "Hello from user mode! (pid 2, ring 3)"
+expect "arg[1] = a1"
+expect "arg[2] = b 2"
+expect "Bye!"
+expect "anka:/> "
+send crash kernel\n
+expect "segmentation fault: write at 0x00100000 (protection violation)"
+expect "[exit 139]"
+expect "anka:/> "
+send crash null\n
+expect "segmentation fault: read at 0x00000000 (page not present)"
+expect "anka:/> "
+send crash cli\n
+expect "killed: General protection fault"
+expect "anka:/> "
+send crash div\n
+expect "killed: Divide error"
+expect "anka:/> "
+send crash hlt\n
+expect "killed: General protection fault"
+expect "anka:/> "
+send run primes 2000\n
+expect "303 primes up to 2000 (largest 1999)"
+expect "anka:/> "
+send run nope\n
+expect "program not found"
+expect "anka:/> "
+send primes 4000000 &\n
+expect "[9] primes started in background"
+expect "anka:/> "
+send ps\n
+expect "user    primes"
+expect "anka:/> "
+send kill 9\n
+expect "anka:/> "
+send kill 1\n
+expect "task is protected"
+expect "anka:/> "
+send guess 42\n
+expect "guess #1> "
+send 50\n
+expect "lower"
+expect "guess #2> "
+send 30\n
+expect "higher"
+expect "guess #3> "
+send 42\n
+expect "correct! You needed 3 tries."
+expect "anka:/> "
+send guess 7\n
+expect "guess #1> "
+send \x03
+expect "bye"
+expect "anka:/> "
+send echo xyzzy\n
+expect "anka:/> "
+send \x11\n
+expect "echo xyzzy\r\nxyzzy\r\n"
+expect "anka:/> "
+serial echo via-serial\x0d
+expect "via-serial\r\nvia-serial\r\n"
+expect "anka:/> "
+send color 14 1\n
+expect "anka:/> "
+send ps\n
+expect "anka:/> "
+send mem\n
+expect "Physical memory"
+expect "anka:/> "
+screen
+quit

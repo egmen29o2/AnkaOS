@@ -1,0 +1,5 @@
+expect "anka:/> "
+send fault\n
+expect "KERNEL PANIC: Page fault: write at 0x00000000 (page not present)"
+expect "Backtrace:"
+quit

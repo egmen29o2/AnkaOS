@@ -1,0 +1,44 @@
+# --- dayaniklilik: bozuk isaretciler, yigin tasmasi, gorev tablosu dolumu, buyuk dosya, sizinti kontrolu ---
+expect "anka:/> "
+send mem\n
+expect "Physical memory"
+expect "anka:/> "
+send crash badptr\n
+expect "read(unmapped ptr) = -1 (expected -1)"
+expect "anka:/> "
+send crash stack\n
+expect "segmentation fault: write at 0x7fffb"
+expect "anka:/> "
+send /etc/motd\n
+expect "cannot execute (error -2)"
+expect "anka:/> "
+send primes 3000 &\n
+send primes 3000 &\n
+send primes 3000 &\n
+send primes 3000 &\n
+send primes 3000 &\n
+expect "primes up to 3000"
+expect "primes up to 3000"
+expect "primes up to 3000"
+expect "primes up to 3000"
+expect "primes up to 3000"
+send echo a very long line 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 > /tmp/long.txt\n
+expect "anka:/> "
+send ls /tmp\n
+expect "long.txt"
+expect "anka:/> "
+send touch f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12 f13 f14 f15 f16 f17 f18 f19\n
+expect "anka:/> "
+send ls\n
+expect "f9"
+expect "anka:/> "
+send rm f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12 f13 f14 f15 f16 f17 f18 f19 /tmp/long.txt\n
+expect "anka:/> "
+send mem\n
+expect "Physical memory"
+expect "anka:/> "
+send ps\n
+expect "shell"
+expect "anka:/> "
+screen
+quit

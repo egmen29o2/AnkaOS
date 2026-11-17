@@ -1,0 +1,4 @@
+expect "anka:/> "
+send reboot\n
+expect "Rebooting..."
+expectstop reset

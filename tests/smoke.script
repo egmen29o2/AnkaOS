@@ -1,0 +1,76 @@
+# --- AnkaOS duman testi: klavye (scancode) uzerinden kabuk, ramfs, ring 3 ---
+expect "anka:/> "
+send help\n
+expect "Programs in /bin run by name: hello primes guess crash"
+expect "anka:/> "
+send ls\n
+expect "<dir>   bin/"
+expect "anka:/> "
+send echo hello world > /tmp/a.txt\n
+expect "anka:/> "
+send cat /tmp/a.txt\n
+expect "hello world"
+expect "anka:/> "
+send echo "second line" >> /tmp/a.txt\n
+expect "anka:/> "
+send cat /tmp/a.txt\n
+expect "second line"
+expect "anka:/> "
+send mkdir /tmp/d0\n
+expect "anka:/> "
+send mkdir /tmp/d1\n
+expect "anka:/> "
+send cd /tmp\n
+expect "anka:/tmp> "
+send cp a.txt d1/b.txt\n
+expect "anka:/tmp> "
+send ls d1\n
+expect "b.txt"
+expect "anka:/tmp> "
+send mv d1/b.txt c.txt\n
+expect "anka:/tmp> "
+send ls\n
+expect "c.txt"
+expect "anka:/tmp> "
+send rm -r d1\n
+expect "anka:/tmp> "
+send rm a.txt\n
+expect "anka:/tmp> "
+send cd ..\n
+expect "anka:/> "
+send hexdump /bin/hello 32\n
+expect "|"
+expect "anka:/> "
+send mem\n
+expect "Kernel heap"
+expect "anka:/> "
+send uptime\n
+expect "ticks @ 100 Hz"
+expect "anka:/> "
+send date\n
+expect "2026-11-15 12:34:56 UTC"
+expect "anka:/> "
+send cpu\n
+expect "Vendor   : AnkaEmuTest!"
+expect "anka:/> "
+send uname\n
+expect "AnkaOS 0.1.0 i386"
+expect "anka:/> "
+send echo a b c d e f g h i j k l m n o p q r s t u v w x y z a b c d e f\n
+expect "too many arguments"
+expect "anka:/> "
+send echo 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789\n
+expect "anka:/> "
+send nosuchcmd\n
+expect "command not found: nosuchcmd"
+expect "anka:/> "
+send ps\n
+expect "shell"
+expect "anka:/> "
+send sleep 1\n
+expect "anka:/> "
+send threads\n
+expect "[thread A] step 5"
+expect "anka:/> "
+screen
+quit

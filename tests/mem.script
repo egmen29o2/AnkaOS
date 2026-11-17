@@ -1,0 +1,14 @@
+expect "anka:/> "
+send mem\n
+expect "Physical memory"
+expect "anka:/> "
+send hello\n
+expect "Bye!"
+expect "anka:/> "
+send primes 2000\n
+expect "303 primes up to 2000"
+expect "anka:/> "
+send mem\n
+expect "Physical memory"
+expect "anka:/> "
+quit

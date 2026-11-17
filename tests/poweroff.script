@@ -1,0 +1,4 @@
+expect "anka:/> "
+send poweroff\n
+expect "Powering off..."
+expectstop poweroff
